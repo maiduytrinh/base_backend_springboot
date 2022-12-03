@@ -18,7 +18,7 @@
 --
 -- Table structure for table `company`
 --
-USE heroku_866adc1de832081;
+USE heroku_bae5303db3cc20e;
 
 DROP TABLE IF EXISTS `company`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
