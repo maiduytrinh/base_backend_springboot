@@ -14,15 +14,6 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class UserResponseType {
-    private Integer id;
-    private LocalDate birthDay;
-    private String fullName;
-    private Boolean sex;
-    private String urlImg;
-    private String uuid;
     private String email;
-    private String passsword;
-    private RoleResponseType roles;
-    private ProfileResponseType profile;
-    private List<ListProfileResponseType> listJobs;
+    private String password;
 }

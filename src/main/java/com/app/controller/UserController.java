@@ -34,7 +34,7 @@ public class UserController {
         UserResponseType userResponseType = mapper.readValue(userJson,UserResponseType.class);
         if(null != image){
             imageUrl = fileStorageService.storeFile(image);
-            userResponseType.setUrlImg(Utils.getUrlFilePathImage(imageUrl));
+//            userResponseType.setUrlImg(Utils.getUrlFilePathImage(imageUrl));
         }
         pResponse = new ResponseEntity<>( userService.save(userResponseType), HttpStatus.OK);
         return pResponse;
@@ -45,32 +45,4 @@ public class UserController {
         ResponseEntity<UserResponseType> pResponse = new ResponseEntity<>(userService.loadUserByEmail(email), HttpStatus.OK);
         return pResponse;
     }
-
-    @PostMapping("/update/{id}")
-    public ResponseEntity<UserResponseType> update( @RequestParam("user") String userJson,
-                                                    @RequestParam(value = "image", required = false) MultipartFile image, 
-                                                    @PathVariable(name = "id") Integer id)
-    throws Exception {
-        ResponseEntity<UserResponseType> pResponse = null;
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        UserResponseType userResponseType = objectMapper.readValue(userJson, UserResponseType.class);
-        if (null != image) {
-            String fileSave = fileStorageService.storeFile(image);
-            userResponseType.setUrlImg(Utils.getUrlFilePathImage(fileSave));
-        }
-        UserResponseType response = userService.update(userResponseType, id);
-        pResponse = new ResponseEntity<>(response, HttpStatus.OK);
-        return pResponse;
-    }
-    
-    // @PostMapping("/register")
-    // public ResponseEntity<UserResponseType> registerUser(@RequestParam("user") String userJson) throws JsonProcessingException {
-    //     ResponseEntity<UserResponseType> pResponse;
-    //     ObjectMapper mapper = new ObjectMapper();
-    //     mapper.registerModule(new JavaTimeModule());
-    //     UserResponseType userResponseType = mapper.readValue(userJson,UserResponseType.class);
-    //     pResponse = new ResponseEntity<>( userService.saveUser(userResponseType), HttpStatus.OK);
-    //     return pResponse;
-    // }
 }
